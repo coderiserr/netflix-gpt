@@ -1,18 +1,22 @@
 
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import { addPopularPlaying } from "../utils/movieSlice";
 import Header from "./Header";
 import MainContainer from "./MainContainer";
-import SecondContainer from "./SecondContainer";
+import { SecondaryContainer } from "./SecondaryContainer";
+
 
 
 const Browser = () => {
    
 useNowPlayingMovies()
+addPopularPlaying()
   return (
     <>
       <Header />
       <MainContainer/>
-      <SecondContainer/>
+      <SecondaryContainer/>
+   
         
     
     </>
