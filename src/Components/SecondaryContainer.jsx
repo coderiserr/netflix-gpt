@@ -11,9 +11,9 @@ export const SecondaryContainer = () => {
     <div className="bg-black pb-5 ">
         <div className=" mt-0 md:-mt-96 pl-4 md:pl-12 relative z-20 ">
     <MovieList title={"Now Playing"} movies={movies.nowPlayingState}/>
-    <MovieList title={"Trending"} movies={movies.nowPlayingState}/>
-    <MovieList title={"Popular"} movies={movies.nowPlayingState}/>
-    <MovieList title={"Horror"} movies={movies.nowPlayingState}/>
+    <MovieList title={"Top Rated"} movies={movies.topRatedmvoies}/>
+    <MovieList title={"Popular"} movies={movies.nowPopularPlaying}/>
+    <MovieList title={"Upcoming"} movies={movies.upcomingMvoies}/>
     </div>
     </div>
      )
