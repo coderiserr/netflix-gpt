@@ -6,11 +6,14 @@ import { addUser, remove } from "../utils/userSlice";
 import { useEffect } from "react";
 import { photo_Url, SUPPORTED_LANG } from "../utils/constant";
 import { toggleGptSearch } from "../utils/gptSlice";
-import lang from "../utils/langConatant";
+
+import { addlangData } from "../utils/configSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSeach);
+ 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -37,6 +40,11 @@ const Header = () => {
   const handleSearchGpt=()=>{
     dispatch(toggleGptSearch())
   }
+  const handlelangOption=(e)=>{
+    dispatch(addlangData(e.target.value))
+  }
+
+  
 
   return (
     <div className="flex items-center justify-between absolute top-0 left-0 w-full px-2 py-6 bg-gradient-to-b from-black z-50">
@@ -44,8 +52,10 @@ const Header = () => {
 
       {user && (
         <>
+        
           <div>
-            <select className="shadow focus:ring-2 hover:ring-whitle font-bold text-white border-2 bg-black border-none rounded py-3 px-4 mr-6">
+          { showGptSearch &&(
+            <select onChange={handlelangOption} className="shadow focus:ring-2 hover:ring-whitle font-bold text-white border-2 bg-black border-none rounded py-3 px-4 mr-6">
             {SUPPORTED_LANG.map((lang) => (
                 <option key={lang.identifier} value={lang.identifier}>
                   {lang.name}
@@ -54,8 +64,12 @@ const Header = () => {
              
             
             </select>
+          )}
+             
+           
+           
             <button className="shadow focus:ring-2 hover:ring-whitle font-bold text-gray-700 border-2 bg-yellow-600 border-none rounded py-3 px-4 mr-6"
-            onClick={handleSearchGpt}>GPTSearch</button>
+            onClick={handleSearchGpt}>{showGptSearch ? "HomePage":"GPTSearch"}</button>
             <button
               onClick={handleSignOut}
               className="shadow focus:ring-2 hover:ring-red-700 font-bold text-gray-700 border-2 bg-red-500 border-none rounded py-3 px-4 mr-6"
